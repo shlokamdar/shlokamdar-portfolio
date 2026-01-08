@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -11,13 +11,30 @@ const navLinks = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleNavClick = (path: string) => {
-    const element = document.querySelector(path);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
     setIsOpen(false);
+    
+    // If not on home page, navigate to home first then scroll
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: path } });
+    } else {
+      const element = document.querySelector(path);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  // Handle scroll after navigation from another page
+  const handleLogoClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -25,13 +42,12 @@ const Navbar = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link 
-            to="/" 
-            onClick={() => handleNavClick("#home")}
+          <button 
+            onClick={handleLogoClick}
             className="font-display font-semibold text-xl text-foreground hover:text-lavender-deep transition-colors"
           >
             Portfolio
-          </Link>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">

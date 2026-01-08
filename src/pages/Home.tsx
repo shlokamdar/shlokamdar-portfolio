@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, Sparkles, Code, Palette, Lightbulb, Heart, Mail, MapPin, Send, Github, Linkedin } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import ProjectCard from "@/components/projects/ProjectCard";
@@ -42,11 +42,34 @@ const values = [
 
 const Home = () => {
   const { toast } = useToast();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+
+  // Handle scroll to section when navigating from another page
+  useEffect(() => {
+    const state = location.state as { scrollTo?: string } | null;
+    if (state?.scrollTo) {
+      setTimeout(() => {
+        const element = document.querySelector(state.scrollTo!);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      // Clear the state
+      window.history.replaceState({}, document.title);
+    } else if (location.hash) {
+      setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [location]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

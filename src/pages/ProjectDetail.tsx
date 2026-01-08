@@ -8,7 +8,7 @@ const ProjectDetail = () => {
   const project = id ? getProjectById(id) : undefined;
 
   if (!project) {
-    return <Navigate to="/projects" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return (
@@ -17,7 +17,7 @@ const ProjectDetail = () => {
       <section className="pt-24 pb-12 gradient-peach">
         <div className="container mx-auto px-6">
           <Link 
-            to="/projects" 
+            to="/#projects" 
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
           >
             <ArrowLeft size={16} />

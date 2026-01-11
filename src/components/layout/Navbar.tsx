@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navLinks = [
   { path: "#home", label: "Home" },
@@ -16,7 +17,7 @@ const Navbar = () => {
 
   const handleNavClick = (path: string) => {
     setIsOpen(false);
-    
+
     // If not on home page, navigate to home first then scroll
     if (location.pathname !== "/") {
       navigate("/", { state: { scrollTo: path } });
@@ -42,11 +43,11 @@ const Navbar = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <button 
+          <button
             onClick={handleLogoClick}
-            className="font-display font-semibold text-xl text-foreground hover:text-lavender-deep transition-colors"
+            className="font-display font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-primary via-lavender-deep to-primary hover:scale-105 transition-transform duration-300 tracking-tight"
           >
-            Portfolio
+            Shloka Kamdar
           </button>
 
           {/* Desktop Navigation */}
@@ -60,16 +61,20 @@ const Navbar = () => {
                 {link.label}
               </button>
             ))}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-lg hover:bg-muted transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}

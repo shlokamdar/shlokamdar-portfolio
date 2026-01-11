@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, Sparkles, Code, Palette, Lightbulb, Heart, Mail, MapPin, Send, Github, Linkedin } from "lucide-react";
+import { ArrowRight, Sparkles, Code, Palette, Lightbulb, Heart, Mail, MapPin, Send, Github, Linkedin, Star, Cloud, Moon, Zap, Coffee, Music } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { projects } from "@/data/projects";
+import { personalData } from "@/data/config";
 import { useToast } from "@/hooks/use-toast";
 
 const skills = [
@@ -39,6 +40,8 @@ const values = [
     color: "bg-peach/30",
   },
 ];
+
+import { MouseTrail } from "@/components/ui/MouseTrail";
 
 const Home = () => {
   const { toast } = useToast();
@@ -89,39 +92,51 @@ const Home = () => {
 
   return (
     <Layout>
+      <MouseTrail />
       {/* Hero Section */}
-      <section id="home" className="gradient-hero min-h-[80vh] flex items-center">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl">
-            <div className="animate-fade-up">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lavender/50 text-sm font-medium text-foreground mb-6">
-                <Sparkles size={14} />
-                Welcome to my portfolio
-              </span>
-            </div>
-            
-            <h1 className="animate-fade-up-delay-1 font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6">
-              I craft digital
+      <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Animated Background Blobs */}
+        <div className="absolute inset-0 -z-10 bg-background">
+          <div className="absolute top-0 -left-4 w-72 h-72 bg-lavender rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+          <div className="absolute top-0 -right-4 w-72 h-72 bg-baby-blue rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-peach rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+          <div className="absolute inset-0 bg-background/50 backdrop-blur-[100px]"></div>
+
+          {/* Whimsical Stars */}
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <Sparkles className="absolute top-20 left-[10%] text-lavender animate-pulse w-6 h-6 opacity-60" style={{ animationDuration: '3s' }} />
+            <Sparkles className="absolute top-40 right-[15%] text-baby-blue animate-pulse w-4 h-4 opacity-50" style={{ animationDuration: '4s', animationDelay: '1s' }} />
+            <Star className="absolute bottom-32 left-[20%] text-peach animate-bounce w-5 h-5 opacity-40" style={{ animationDuration: '5s', animationDelay: '0.5s' }} />
+            <Star className="absolute top-1/3 left-1/2 text-white animate-pulse w-3 h-3 opacity-30" style={{ animationDuration: '2s' }} />
+            <Star className="absolute bottom-1/4 right-[25%] text-sage animate-bounce w-4 h-4 opacity-40" style={{ animationDuration: '6s', animationDelay: '2s' }} />
+          </div>
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl">
+
+
+            <h1 className="animate-fade-up-delay-1 font-display text-6xl md:text-7xl lg:text-8xl font-bold text-foreground leading-tight mb-8 tracking-tight">
+              I'm {personalData.name},
               <br />
-              <span className="text-lavender-deep">experiences</span>
+              <span className="text-gradient">Unknown Limits</span>
             </h1>
-            
-            <p className="animate-fade-up-delay-2 text-lg md:text-xl text-muted-foreground max-w-xl mb-8">
-              A passionate developer focused on creating beautiful, functional, 
-              and user-centered digital experiences.
+
+            <p className="animate-fade-up-delay-2 text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
+              {personalData.bio}
             </p>
-            
-            <div className="animate-fade-up-delay-3 flex flex-wrap gap-4">
+
+            <div className="animate-fade-up-delay-3 flex flex-wrap gap-6">
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-medium hover:bg-foreground/90 transition-colors"
+                className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-foreground text-background font-bold text-lg hover:pr-10 transition-all duration-300"
               >
                 View Projects
-                <ArrowRight size={18} />
+                <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-foreground/20 text-foreground font-medium hover:bg-foreground/5 transition-colors"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-border bg-white/5 backdrop-blur-sm text-foreground font-medium hover:bg-white/10 transition-colors"
               >
                 Get in Touch
               </a>
@@ -131,33 +146,68 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <div className="w-full max-w-md mx-auto aspect-square rounded-3xl bg-lavender/30 flex items-center justify-center animate-float">
-                <span className="font-display text-6xl font-bold text-lavender-deep/50">
-                  👋
-                </span>
+      <section id="about" className="py-24 bg-background relative overflow-hidden">
+        {/* Whimsical Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-30">
+          <Cloud className="absolute top-20 right-[10%] text-lavender w-12 h-12 animate-bounce" style={{ animationDuration: '6s' }} />
+          <Moon className="absolute bottom-40 left-[5%] text-baby-blue w-8 h-8 animate-pulse" style={{ animationDuration: '4s' }} />
+          <div className="absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-peach animate-ping" style={{ animationDuration: '3s' }}></div>
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Bio & Intro */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-center lg:text-left mb-8">
+                  <span className="text-gradient">About Me</span>
+                </h2>
+                <div className="glass-card p-8">
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                    {personalData.bio}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    I believe in building technology that bridges the gap between complex infrastructure and intuitive user experiences.
+                    With a strong foundation in both Cloud Engineering and Full Stack Development, I aim to create scalable, robust, and beautiful applications.
+                  </p>
+                </div>
               </div>
+
+
             </div>
 
-            <div className="order-1 lg:order-2 space-y-6">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-                About Me
-              </h2>
-              <div className="space-y-4 text-muted-foreground">
-                <p>
-                  I'm a full-stack developer with a passion for creating beautiful, 
-                  functional applications. My journey in tech started with curiosity 
-                  about how things work, and it has evolved into a career focused on 
-                  solving real problems.
-                </p>
-                <p>
-                  When I'm not coding, you'll find me exploring new coffee shops, 
-                  reading about design systems, or contributing to open-source projects. 
-                  I believe in the power of technology to make life better.
-                </p>
+            {/* Experience */}
+            <div>
+              <h3 className="font-display text-2xl font-bold text-foreground mb-8 flex items-center gap-3">
+                <span className="p-2 rounded-lg bg-baby-blue/30 text-foreground">
+                  <Code size={24} />
+                </span>
+                Experience
+              </h3>
+              <div className="space-y-6 relative pl-6 border-l-2 border-white/10 ml-3">
+                {personalData.experience.map((exp, index) => (
+                  <div key={index} className="relative">
+                    {/* Timeline Dot */}
+                    <span className="absolute -left-[31px] top-6 w-4 h-4 rounded-full bg-background border-2 border-lavender ring-4 ring-background"></span>
+
+                    <div className="glass-card p-6 group hover:border-baby-blue/50 transition-colors">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
+                        <h4 className="font-bold text-foreground text-xl">{exp.role}</h4>
+                        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground bg-white/5 px-3 py-1 rounded-full">
+                          {exp.period}
+                        </span>
+                      </div>
+                      <p className="text-lavender-deep font-medium mb-4 flex items-center gap-2">
+                        {exp.company}
+                        <span className="w-1 h-1 rounded-full bg-border"></span>
+                        <span className="text-muted-foreground text-sm font-normal">{exp.location}</span>
+                      </p>
+                      <p className="text-muted-foreground leading-relaxed text-sm">
+                        {exp.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -165,21 +215,32 @@ const Home = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-24 bg-cream/50">
-        <div className="container mx-auto px-6">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
-            What I Value
+      <section className="py-24 relative overflow-hidden">
+        {/* Whimsical Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-40">
+          <Heart className="absolute top-10 left-[20%] text-peach w-6 h-6 animate-pulse" style={{ animationDuration: '3s' }} />
+          <Music className="absolute bottom-20 right-[20%] text-sage w-8 h-8 animate-bounce" style={{ animationDuration: '5s', animationDelay: '1s' }} />
+        </div>
+
+        <div className="absolute inset-0 bg-secondary/10 -z-10 clip-path-slant"></div>
+        <div className="container mx-auto px-6 relative z-10">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-16">
+            <span className="text-gradient">Core Values</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value) => (
-              <div key={value.title} className="pastel-card text-center">
-                <div className={`w-14 h-14 ${value.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
-                  <value.icon size={24} className="text-foreground" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <div
+                key={value.title}
+                className="glass-card text-center group hover:scale-105 transition-transform duration-300"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 bg-white/10 backdrop-blur-md group-hover:bg-white/20 transition-colors shadow-inner`}>
+                  <value.icon size={28} className="text-foreground group-hover:text-lavender-deep transition-colors" />
                 </div>
-                <h3 className="font-display font-semibold text-foreground mb-2">
+                <h3 className="font-display font-semibold text-xl text-foreground mb-3">
                   {value.title}
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -189,26 +250,36 @@ const Home = () => {
       </section>
 
       {/* Skills Section */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
-            Skills & Expertise
+      <section className="py-24 bg-background relative overflow-hidden">
+        {/* Whimsical Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-30">
+          <Zap className="absolute top-20 left-[15%] text-baby-blue w-10 h-10 animate-pulse" style={{ animationDuration: '2s' }} />
+          <Code className="absolute bottom-20 right-[10%] text-lavender w-8 h-8 animate-bounce" style={{ animationDuration: '4s' }} />
+          <Coffee className="absolute top-1/3 right-1/4 text-peach w-6 h-6 animate-ping" style={{ animationDuration: '5s', animationDelay: '2s' }} />
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-16">
+            <span className="text-gradient">Skills & Expertise</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {skills.map((skillGroup, index) => {
-              const colors = ["bg-lavender/20", "bg-sage/20", "bg-baby-blue/20", "bg-peach/20"];
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {Object.entries(personalData.skills).map(([category, items], index) => {
               return (
-                <div key={skillGroup.category} className={`pastel-card ${colors[index % 4]} hover:shadow-card hover:translate-y-0`}>
-                  <h3 className="font-display font-semibold text-foreground mb-4">
-                    {skillGroup.category}
+                <div
+                  key={category}
+                  className="glass-card hover:bg-white/15 dark:hover:bg-white/10 transition-colors"
+                >
+                  <h3 className="font-display font-semibold text-xl text-foreground mb-6 capitalize flex items-center gap-2">
+                    <span className="w-2 h-8 rounded-full bg-gradient-to-b from-lavender to-baby-blue"></span>
+                    {category}
                   </h3>
-                  <ul className="space-y-2">
-                    {skillGroup.items.map((skill) => (
-                      <li key={skill} className="text-sm text-muted-foreground">
+                  <div className="flex flex-wrap gap-2">
+                    {items.map((skill) => (
+                      <span key={skill} className="tech-pill text-sm">
                         {skill}
-                      </li>
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               );
             })}
@@ -217,8 +288,8 @@ const Home = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-24 bg-sage/20">
-        <div className="container mx-auto px-6">
+      <section id="projects" className="py-24 bg-sage/20 relative overflow-hidden">
+        <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
               Projects
@@ -243,92 +314,97 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-peach/20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
+      <section id="contact" className="py-24 relative overflow-hidden">
+        {/* Whimsical Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-40">
+          <Send className="absolute top-20 right-[20%] text-lavender w-8 h-8 animate-bounce" style={{ animationDuration: '4s' }} />
+          <Mail className="absolute bottom-32 left-[10%] text-baby-blue w-10 h-10 animate-pulse" style={{ animationDuration: '3s' }} />
+        </div>
+
+        <div className="absolute inset-0 bg-lavender/5 -z-10"></div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
               Get in Touch
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Have a project in mind or just want to say hello?
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto items-start">
             {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
+            <div className="space-y-8 lg:sticky lg:top-24">
+              <div className="glass-card p-8 bg-gradient-to-br from-white/10 to-transparent">
                 <h3 className="font-display text-2xl font-semibold text-foreground mb-6">
                   Let's Connect
                 </h3>
-                <p className="text-muted-foreground mb-8">
-                  Whether you're looking to collaborate on a project, have a question, 
+                <p className="text-muted-foreground mb-8 leading-relaxed">
+                  Whether you're looking to collaborate on a project, have a question,
                   or just want to chat about technology and design, I'm always happy to connect.
                 </p>
-              </div>
 
-              {/* Contact Details */}
-              <div className="space-y-4">
-                <a
-                  href="mailto:hello@example.com"
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-lavender/20 hover:bg-lavender/30 transition-colors"
-                >
-                  <div className="p-3 rounded-xl bg-lavender/50">
-                    <Mail size={20} className="text-foreground" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Email</p>
-                    <p className="font-medium text-foreground">hello@example.com</p>
-                  </div>
-                </a>
+                <div className="space-y-6">
+                  <a
+                    href={personalData.socials.email}
+                    className="flex items-center gap-4 group"
+                  >
+                    <div className="p-3 rounded-full bg-white/10 group-hover:bg-white/20 transition-colors backdrop-blur-sm">
+                      <Mail size={20} className="text-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground uppercase tracking-wider">Email</p>
+                      <p className="font-medium text-foreground group-hover:text-lavender-deep transition-colors">
+                        {personalData.socials.email.replace('mailto:', '')}
+                      </p>
+                    </div>
+                  </a>
 
-                <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage/20">
-                  <div className="p-3 rounded-xl bg-sage/50">
-                    <MapPin size={20} className="text-foreground" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Location</p>
-                    <p className="font-medium text-foreground">San Francisco, CA</p>
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 rounded-full bg-white/10 backdrop-blur-sm">
+                      <MapPin size={20} className="text-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground uppercase tracking-wider">Location</p>
+                      <p className="font-medium text-foreground">{personalData.location}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Social Links */}
-              <div>
-                <h4 className="font-display font-semibold text-foreground mb-4">
-                  Find me online
-                </h4>
-                <div className="flex gap-3">
-                  <a
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-lavender/30 hover:bg-lavender/50 transition-colors"
-                    aria-label="GitHub"
-                  >
-                    <Github size={20} className="text-foreground" />
-                  </a>
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-baby-blue/30 hover:bg-baby-blue/50 transition-colors"
-                    aria-label="LinkedIn"
-                  >
-                    <Linkedin size={20} className="text-foreground" />
-                  </a>
+                <div className="mt-10">
+                  <p className="text-sm font-medium text-foreground mb-4">Find me online</p>
+                  <div className="flex gap-4">
+                    <a
+                      href={personalData.socials.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/20 hover:scale-110 transition-all"
+                      aria-label="GitHub"
+                    >
+                      <Github size={20} className="text-foreground" />
+                    </a>
+                    <a
+                      href={personalData.socials.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/20 hover:scale-110 transition-all"
+                      aria-label="LinkedIn"
+                    >
+                      <Linkedin size={20} className="text-foreground" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Contact Form */}
-            <div className="pastel-card hover:shadow-card hover:translate-y-0">
-              <h3 className="font-display text-2xl font-semibold text-foreground mb-6">
+            <div className="glass-card">
+              <h3 className="font-display text-2xl font-semibold text-foreground mb-8">
                 Send a Message
               </h3>
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="text-sm font-medium text-foreground ml-1">
                     Name
                   </label>
                   <input
@@ -338,13 +414,13 @@ const Home = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-lavender-deep/50 transition-all"
+                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white/10 focus:border-lavender/50 transition-all backdrop-blur-sm"
                     placeholder="Your name"
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium text-foreground ml-1">
                     Email
                   </label>
                   <input
@@ -354,13 +430,13 @@ const Home = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-lavender-deep/50 transition-all"
+                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white/10 focus:border-lavender/50 transition-all backdrop-blur-sm"
                     placeholder="your@email.com"
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium text-foreground ml-1">
                     Message
                   </label>
                   <textarea
@@ -370,14 +446,14 @@ const Home = () => {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-lavender-deep/50 transition-all resize-none"
+                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white/10 focus:border-lavender/50 transition-all backdrop-blur-sm resize-none"
                     placeholder="Tell me about your project or just say hi..."
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-foreground text-background font-medium hover:bg-foreground/90 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-foreground text-background font-bold text-lg hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
                 >
                   <Send size={18} />
                   Send Message

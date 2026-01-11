@@ -1,73 +1,71 @@
-# Welcome to your Lovable project
+# Pastel Portfolio Showcase
 
-## Project info
+A futuristic, pastel-themed portfolio website built for **Shloka Kamdar**. This project showcases creative work with a unique blend of modern web technologies and interactive design elements.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## ✨ Features
 
-## How can I edit this code?
+- **Futuristic Pastel Design**: A visually striking UI with a soft, modern color palette.
+- **Interactive Elements**:
+  - Mouse-following sparkle trail effect.
+  - Floating themed icons throughout the site.
+  - Interactive "Built with love and cookies" footer that simulates eating cookies when clicked.
+- **Blog-Style Projects**: A transformed projects section that displays work in a detailed, blog-post format with reading times and publication dates.
+- **Responsive Layout**: Fully optimized for various screen sizes.
+- **Modern Animations**: Smooth transitions and engaging motion effects including navbar text animations.
 
-There are several ways of editing your application.
+## 🛠️ Tech Stack
 
-**Use Lovable**
+- **Framework**: [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [shadcn-ui](https://ui.shadcn.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🚀 Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+To run this project locally, follow these steps:
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Ensure you have Node.js installed on your machine.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation
 
-Follow these steps:
+1.  Clone the repository:
+    ```bash
+    git clone <YOUR_GIT_URL>
+    ```
+2.  Navigate to the project directory:
+    ```bash
+    cd pastel-portfolio-showcase
+    ```
+3.  Install dependencies:
+    ```bash
+    npm install
+    ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Development
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Start the development server:
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open the URL shown in your terminal (usually `http://localhost:8080` or `http://localhost:5173`) to view the application.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Build
 
-**Use GitHub Codespaces**
+To build the project for production:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```bash
+npm run build
+```
 
-## What technologies are used for this project?
+## 📂 Project Structure
 
-This project is built with:
+- `src/components`: Reusable UI components.
+- `src/pages`: Main route components.
+- `src/data`: Static data files (e.g., project content).
+- `src/hooks`: Custom React hooks.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)

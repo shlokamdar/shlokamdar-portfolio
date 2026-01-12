@@ -174,7 +174,64 @@ export const projects: Project[] = [
     "date": "04-01-2025",
     "readTime": "9 min read",
     "author": "Shloka Kamdar"
-  }
+  },
+  {
+    "id": 6,
+    "title": "Configuration Management with Ansible: Nginx and CloudWatch Logs",
+    "category": "DevOps / Cloud Automation",
+    "description": "Automated the installation and configuration of Nginx and the CloudWatch Agent using Ansible to centrally manage log shipping from EC2 instances to AWS CloudWatch. The setup uses a master-slave architecture with secure SSH access, IAM roles, and reusable Ansible playbooks.",
+    "shortDescription": "Ansible-based automation to install Nginx and ship logs to AWS CloudWatch using IAM roles and centralized configuration management.",
+    "image": "/images/projects/Ansible-cloudwatch.png",
+    "technologies": [
+      "Ansible",
+      "AWS EC2",
+      "AWS CloudWatch",
+      "IAM Roles",
+      "Nginx",
+      "Linux",
+      "SSH"
+    ],
+    // "link": "https://github.com/shlokamdar/ansible-nginx-cloudwatch",
+    "liveUrl": null,
+    "githubUrl": "https://github.com/shlokamdar/ansible-nginx-cloudwatch",
+    // "documentationUrl": "/docs/ansible-nginx-cloudwatch",
+    "problem": "Manually installing web servers and configuring log monitoring across multiple servers is error-prone, time-consuming, and difficult to scale.",
+    "solution": "Implemented Ansible-based configuration management using a master-slave architecture to automate Nginx installation and CloudWatch Agent configuration, enabling centralized log collection with minimal manual intervention.",
+    // "architectureImage": "/images/projects/ansible-nginx-cloudwatch-architecture.png",
+    "date": "10-01-2026",
+    "readTime": "5 min read",
+    "author": "Shloka Kamdar"
+  },
+  {
+  "id": 7,
+  "title": "WishNet – Wishlist and Secret Santa Management Platform",
+  "category": "Full Stack / Web Development",
+  "description": "WishNet is a Django-based web platform designed to simplify gifting and wishlist management. It enables users to create and share wishlists, manage budgets, connect with friends, and organize Secret Santa groups with secure assignments, removing the stress and guesswork from gifting.",
+  "shortDescription": "A Django web application for wishlist sharing, budget tracking, friendships, and Secret Santa group management.",
+  "image": "/images/projects/wishnet.png",
+  "technologies": [
+    "Django",
+    "Python",
+    "HTML",
+    "CSS",
+    "Bootstrap",
+    "SQLite",
+    "OTP Authentication",
+    "PythonAnywhere"
+  ],
+  "link": "https://wishnet.pythonanywhere.com",
+  // "liveUrl": "https://wishnet.pythonanywhere.com",
+  "githubUrl": "https://github.com/shlokamdar/wishnet_project",
+  "documentationUrl": "/docs/wishnet",
+  "problem": "Gift-giving often involves uncertainty, budget overruns, and poor coordination among friends and family, especially during group events like Secret Santa.",
+  "solution": "Built a centralized platform where users can manage wishlists, track budgets, connect with friends, and participate in Secret Santa groups with automated and secure participant assignment.",
+  "architectureImage": "/images/projects/wishnet-architecture.png",
+  "date": "15-12-2024",
+  "readTime": "3 min read",
+  "author": "Shloka Kamdar"
+}
+
+
 
 ];
 

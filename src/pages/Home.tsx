@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, Sparkles, Code, Palette, Lightbulb, Heart, Mail, MapPin, Send, Github, Linkedin, Star, Cloud, Moon, Zap, Coffee, Music } from "lucide-react";
+import { ArrowRight, Sparkles, Code, Palette, Lightbulb, Heart, Mail, MapPin, Send, Github, Linkedin, Star, Cloud, Moon, Zap, Coffee, Music, ExternalLink } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { projects } from "@/data/projects";
@@ -16,28 +16,34 @@ const skills = [
 
 const values = [
   {
-    icon: Code,
-    title: "Clean Code",
-    description: "I believe in writing code that's easy to read, maintain, and scale.",
+    icon: Sparkles,
+    title: "Clarity over complexity",
+    description: "I believe simple, well-structured solutions are better than over-engineered ones.",
     color: "bg-lavender/30",
   },
   {
-    icon: Palette,
-    title: "Thoughtful Design",
-    description: "Every pixel matters. I craft interfaces that are both beautiful and functional.",
+    icon: Code,
+    title: "Ownership",
+    description: "If something breaks, I take responsibility for fixing it and understanding the root cause.",
     color: "bg-sage/30",
   },
   {
     icon: Lightbulb,
-    title: "Continuous Learning",
-    description: "Technology evolves, and so do I. I'm always exploring new tools and techniques.",
+    title: "Continuous learning",
+    description: "I’m always improving my skills by building, experimenting, and staying curious.",
     color: "bg-baby-blue/30",
   },
   {
-    icon: Heart,
-    title: "User First",
-    description: "The best solutions come from truly understanding user needs.",
+    icon: Zap,
+    title: "Reliability",
+    description: "I value systems that are secure, predictable, and production-ready.",
     color: "bg-peach/30",
+  },
+  {
+    icon: Heart,
+    title: "Integrity",
+    description: "I’m honest about what I know, what I don’t, and I put quality and correctness first.",
+    color: "bg-lavender/30",
   },
 ];
 
@@ -52,6 +58,7 @@ const Home = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("All");
 
   // Handle scroll to section when navigating from another page
   useEffect(() => {
@@ -149,7 +156,7 @@ const Home = () => {
             </h1>
 
             <p className="animate-fade-up-delay-2 text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
-              {personalData.bio}
+              Creating digital experiences that matter. From secure cloud architectures to pixel-perfect web applications, I build solutions that are as robust as they are beautiful.
             </p>
 
             <div className="animate-fade-up-delay-3 flex flex-wrap gap-6">
@@ -189,13 +196,25 @@ const Home = () => {
                   <span className="text-gradient">About Me</span>
                 </h2>
                 <div className="glass-card p-6 md:p-8">
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  <p className="text-muted-foreground leading-relaxed mb-6">
                     {personalData.bio}
                   </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    I believe in building technology that bridges the gap between complex infrastructure and intuitive user experiences.
-                    With a strong foundation in both Cloud Engineering and Full Stack Development, I aim to create scalable, robust, and beautiful applications.
-                  </p>
+
+                  <div
+                    className="mt-6 group relative inline-flex items-center gap-4 px-6 py-4 rounded-3xl bg-white/40 border border-lavender/30 shadow-sm hover:shadow-md hover:bg-white/60 hover:scale-[1.02] transition-all duration-300 cursor-pointer backdrop-blur-sm w-fit"
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    <span className="text-4xl animate-wave origin-bottom-right inline-block group-hover:rotate-12 transition-transform filter drop-shadow-sm">👋</span>
+                    <div className="flex flex-col">
+                      <span className="font-handwriting text-2xl font-bold bg-gradient-to-r from-lavender-deep to-primary bg-clip-text text-transparent">
+                        Come say hi!
+                      </span>
+                      <span className="text-xs font-medium text-muted-foreground group-hover:text-lavender-deep transition-colors">
+                        Always happy to chat & collaborate
+                      </span>
+                    </div>
+                    <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-yellow-400 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 animate-pulse" />
+                  </div>
                 </div>
               </div>
 
@@ -231,6 +250,21 @@ const Home = () => {
                       <p className="text-muted-foreground leading-relaxed text-sm">
                         {exp.description}
                       </p>
+
+                      {/* Work URL Button */}
+                      {(exp as any).work_url && (
+                        <div className="mt-4">
+                          <a
+                            href={(exp as any).work_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-xs font-semibold text-lavender-deep bg-lavender/10 px-3 py-2 rounded-lg hover:bg-lavender/20 transition-colors"
+                          >
+                            <ExternalLink size={14} />
+                            View Work
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -253,7 +287,7 @@ const Home = () => {
           <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-16">
             <span className="text-gradient">Core Values</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {values.map((value, index) => (
               <div
                 key={value.title}
@@ -316,26 +350,80 @@ const Home = () => {
       {/* Projects Section */}
       <section id="projects" className="py-24 bg-sage/20 relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
-              Projects
-            </h2>
-            <p className="text-muted-foreground">
-              A collection of projects I've worked on
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+            <div className="text-center md:text-left">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
+                Featured Projects
+              </h2>
+              <p className="text-muted-foreground">
+                A selection of my recent work in cloud and development
+              </p>
+            </div>
+
+            <Link
+              to="/projects"
+              className="hidden md:inline-flex items-center gap-2 text-lavender-deep font-semibold hover:gap-3 transition-all"
+            >
+              View All Projects <ArrowRight size={20} />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+
+          {/* Category Filter */}
+          <div className="flex flex-wrap justify-center md:justify-start gap-3 mb-8">
+            {["All", ...Array.from(new Set(projects.flatMap((p) => p.category.split(" / "))))].map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
+                  ? "bg-foreground text-background scale-105"
+                  : "bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground border border-white/10"
+                  }`}
+              >
+                {category}
+              </button>
             ))}
           </div>
 
-          {projects.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-muted-foreground">No projects yet. Check back soon!</p>
+          <div className="relative">
+            {/* Horizontal Scroll Container */}
+            <div className="flex overflow-x-auto gap-6 pb-8 -mx-6 px-6 scrollbar-hide snap-x snap-mandatory">
+              {projects
+                .filter((project) => activeCategory === "All" || project.category.includes(activeCategory))
+                .slice(0, 4)
+                .map((project, index) => (
+                  <div key={project.id} className="min-w-[300px] md:min-w-[350px] snap-center">
+                    <ProjectCard project={project} index={index} />
+                  </div>
+                ))}
+
+              {/* View More Card */}
+              <div className="min-w-[200px] md:min-w-[250px] snap-center flex items-center justify-center">
+                <Link
+                  to="/projects"
+                  className="group flex flex-col items-center gap-4 text-center p-8 rounded-3xl border-2 border-dashed border-white/20 hover:border-lavender hover:bg-white/5 transition-all duration-300 w-full h-[400px] justify-center"
+                >
+                  <div className="p-4 rounded-full bg-lavender/10 text-lavender-deep group-hover:scale-110 transition-transform">
+                    <ArrowRight size={32} />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-xl text-foreground mb-1">View All</h3>
+                    <p className="text-muted-foreground text-sm">See {projects.length} projects</p>
+                  </div>
+                </Link>
+              </div>
             </div>
-          )}
+
+            {/* Mobile View All Button */}
+            <div className="mt-8 text-center md:hidden">
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-2 text-lavender-deep font-semibold"
+              >
+                View All Projects <ArrowRight size={20} />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

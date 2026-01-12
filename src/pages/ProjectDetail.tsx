@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Github, ExternalLink, Calendar, Clock, User, Tag, Zap, Code, Lightbulb, ArrowRight } from "lucide-react";
-import { getProjectById } from "@/data/projects";
+import { getProjectById, projects } from "@/data/projects";
 import Layout from "@/components/layout/Layout";
+import ProjectCard from "@/components/projects/ProjectCard";
 import { useEffect } from "react";
 
 const ProjectDetail = () => {
@@ -163,12 +164,31 @@ const ProjectDetail = () => {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-8 py-4 rounded-full bg-white border border-border text-foreground font-bold hover:bg-gray-50 transition-colors shadow-sm"
+                  className="flex items-center gap-2 px-8 py-4 rounded-full bg-background border border-border text-foreground font-bold hover:bg-secondary/50 transition-colors shadow-sm"
                 >
                   <ExternalLink size={20} />
                   View Live Demo
                 </a>
               )}
+            </div>
+          </div>
+
+          {/* More Projects Section */}
+          <div className="mt-24 border-t border-border pt-16">
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="font-display text-2xl font-bold text-foreground">More Projects</h3>
+              <Link to="/projects" className="text-sm font-semibold text-lavender-deep hover:underline flex items-center gap-1">
+                View All <ArrowRight size={16} />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {projects
+                .filter(p => p.id !== project.id) // Exclude current project
+                .slice(0, 3) // Take only 3
+                .map((p, index) => (
+                  <ProjectCard key={p.id} project={p} index={index} />
+                ))}
             </div>
           </div>
 

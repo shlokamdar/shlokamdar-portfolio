@@ -16,11 +16,11 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
     >
       <div className="glass-card overflow-hidden h-full flex flex-col hover:border-lavender/50 transition-all duration-300 hover:-translate-y-1">
         {/* Image */}
-        <div className="relative h-48 overflow-hidden">
+        <div className="relative h-44 md:h-48 overflow-hidden">
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-cover md:object-contain bg-muted/20 transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute top-4 left-4">
             <span className="glass-card px-3 py-1 text-xs font-semibold text-foreground backdrop-blur-md border-white/20">
@@ -30,7 +30,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         </div>
 
         {/* Content */}
-        <div className="p-6 flex flex-col flex-grow">
+        <div className="p-5 md:p-6 flex flex-col flex-grow">
           <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
             <span className="flex items-center gap-1">
               <Calendar size={12} />

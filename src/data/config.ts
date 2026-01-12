@@ -8,7 +8,8 @@ export const personalData = {
         github: "https://github.com/shlokamdar",
         linkedin: "https://linkedin.com/in/shlokamdar",
         twitter: "https://twitter.com",
-        email: "mailto:shlokamdar@gmail.com"
+        email: "mailto:shlokamdar@gmail.com",
+        medium: "https://medium.com/@byshlokamdar"
     },
     experience: [
         {
@@ -32,7 +33,8 @@ export const personalData = {
         }
     ],
     skills: {
-        cloud: ["AWS", "Terraform", "Jenkins", "Ansible", "Linux Server Administration"],
+        cloud: ["AWS", "Terraform"],
+        devops: ["Jenkins", "Ansible", "Linux Server Administration","Docker","Kubernetes"],
         programming: ["Python", "Bash (Linux Shell)", "JavaScript"],
         frameworks: ["Django", "Bootstrap"],
         databases: ["MySQL", "SQLite"],

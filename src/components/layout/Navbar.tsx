@@ -80,12 +80,12 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4 border-t border-border animate-fade-up">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2 p-4">
               {navLinks.map((link) => (
                 <button
                   key={link.path}
                   onClick={() => handleNavClick(link.path)}
-                  className="text-sm font-medium py-2 transition-colors text-muted-foreground hover:text-foreground text-left"
+                  className="text-lg font-medium py-3 px-4 rounded-xl transition-colors text-muted-foreground hover:text-foreground hover:bg-muted/50 text-left"
                 >
                   {link.label}
                 </button>

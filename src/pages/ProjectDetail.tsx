@@ -18,7 +18,7 @@ const ProjectDetail = () => {
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">Project not found</h2>
+            <h2 className="text-2xl font-bold mb-4">Article not found</h2>
             <Link to="/" className="text-primary hover:underline">
               Return Home
             </Link>
@@ -30,103 +30,111 @@ const ProjectDetail = () => {
 
   return (
     <Layout>
-      <div className="py-24 relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 -z-10 bg-background/50">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-lavender/20 rounded-full blur-3xl opacity-50"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-baby-blue/20 rounded-full blur-3xl opacity-50"></div>
-        </div>
+      <div className="min-h-screen bg-background relative overflow-hidden pb-24">
+        {/* Subtle Background Elements */}
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lavender/10 via-background to-background"></div>
 
-        <div className="container mx-auto px-6 max-w-4xl">
+        {/* Hero Section */}
+        <div className="container mx-auto px-6 max-w-4xl pt-24 md:pt-32">
           <Link
             to="/#projects"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors group"
+            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground mb-8 transition-colors group"
           >
-            <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Projects
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            Back to Articles
           </Link>
 
-          {/* Article Header */}
-          <header className="mb-12 text-center animate-fade-up">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-sm font-medium text-foreground mb-6">
-              <Tag size={14} />
-              {project.category}
+          <header className="mb-12 animate-fade-up">
+            <div className="flex flex-wrap items-center gap-4 mb-6 text-sm">
+              <span className="px-3 py-1 rounded-full bg-lavender/10 text-lavender-deep font-semibold tracking-wide uppercase">
+                {project.category}
+              </span>
+              <span className="text-muted-foreground flex items-center gap-1">
+                <Calendar size={14} />
+                {project.date}
+              </span>
+              <span className="text-muted-foreground flex items-center gap-1">
+                <Clock size={14} />
+                {project.readTime}
+              </span>
             </div>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8 leading-[1.15] tracking-tight">
               {project.title}
             </h1>
 
-            <div className="flex flex-wrap items-center justify-center gap-6 text-muted-foreground text-sm">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-peach/50 flex items-center justify-center text-foreground font-bold">
-                  SK
-                </div>
-                <span>{project.author || "Shloka Kamdar"}</span>
+            <div className="flex items-center gap-4 border-b border-border pb-8">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-peach to-lavender flex items-center justify-center text-foreground font-bold shadow-sm">
+                SK
               </div>
-              <span className="w-1 h-1 rounded-full bg-border"></span>
-              <div className="flex items-center gap-2">
-                <Calendar size={16} />
-                {project.date || "Recently"}
-              </div>
-              <span className="w-1 h-1 rounded-full bg-border"></span>
-              <div className="flex items-center gap-2">
-                <Clock size={16} />
-                {project.readTime || "5 min read"}
+              <div>
+                <p className="font-semibold text-foreground text-sm">{project.author || "Shloka Kamdar"}</p>
+                <p className="text-xs text-muted-foreground">Cloud Engineer & Full Stack Dev</p>
               </div>
             </div>
           </header>
 
           {/* Featured Image */}
-          <div className="relative aspect-video rounded-3xl overflow-hidden mb-16 shadow-2xl ring-1 ring-white/10 animate-fade-up-delay-1">
+          <div className="relative aspect-video rounded-2xl overflow-hidden mb-16 shadow-lg bg-muted/30 animate-fade-up-delay-1 border border-border/50">
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain p-4 md:p-8"
             />
           </div>
 
-          {/* Content Body */}
-          <article className="prose prose-lg dark:prose-invert max-w-none animate-fade-up-delay-2">
-            {/* Overview - styled as lead paragraph */}
-            <div className="glass-card p-8 mb-12 border-l-4 border-lavender">
-              <p className="text-xl leading-relaxed text-foreground font-medium m-0">
-                {project.description}
-              </p>
+          {/* Main Content */}
+          <article className="prose prose-lg dark:prose-invert max-w-none animate-fade-up-delay-2 prose-headings:font-display prose-headings:font-bold prose-p:text-muted-foreground prose-p:leading-8 prose-li:text-muted-foreground">
+
+            {/* Introduction / Description */}
+            <div className="text-xl md:text-2xl leading-relaxed font-medium text-foreground/90 mb-12 font-display">
+              {project.description}
             </div>
 
-            {/* Problem & Solution */}
+            {/* Problem Section */}
             {project.problem && (
-              <div className="mb-12">
-                <h2 className="font-display text-3xl font-bold mb-4 flex items-center gap-3">
-                  <Zap className="text-orange-400" /> The Challenge
+              <div className="my-12 pl-6 border-l-4 border-orange-400/50 bg-orange-50/5 dark:bg-orange-900/10 p-6 rounded-r-xl">
+                <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground mt-0">
+                  <Zap className="text-orange-400 w-6 h-6" /> The Challenge
                 </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  {project.problem}
-                </p>
+                <p className="m-0">{project.problem}</p>
               </div>
             )}
 
+            {/* Architecture Image (if distinct) */}
+            {project.architectureImage && project.architectureImage !== project.image && (
+              <figure className="my-12 text-center">
+                <div className="rounded-xl overflow-hidden border border-border shadow-md bg-white/50 dark:bg-black/20">
+                  <img
+                    src={project.architectureImage}
+                    alt={`${project.title} Architecture`}
+                    className="w-full h-auto max-h-[500px] object-contain mx-auto"
+                  />
+                </div>
+                <figcaption className="text-sm text-muted-foreground mt-3 italic">System Architecture Diagram</figcaption>
+              </figure>
+            )}
+
+            {/* Solution Section */}
             {project.solution && (
-              <div className="mb-12">
-                <h2 className="font-display text-3xl font-bold mb-4 flex items-center gap-3">
-                  <Lightbulb className="text-yellow-400" /> The Solution
+              <div className="my-12">
+                <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-foreground">
+                  <Lightbulb className="text-yellow-400 w-8 h-8" /> The Solution
                 </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  {project.solution}
-                </p>
+                <p>{project.solution}</p>
               </div>
             )}
 
-            {/* Tech Stack */}
-            <div className="my-12">
-              <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
-                <Code className="text-baby-blue" /> Technologies Used
+            {/* Technologies */}
+            <div className="mt-16 pt-8 border-t border-border">
+              <h3 className="text-lg font-bold uppercase tracking-wider text-muted-foreground mb-6 flex items-center gap-2">
+                <Code size={18} /> Technologies Used
               </h3>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 not-prose">
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-4 py-2 rounded-full bg-secondary/30 text-secondary-foreground font-medium text-sm border border-white/5"
+                    className="px-4 py-2 rounded-full bg-secondary/50 text-secondary-foreground font-medium text-sm border border-border/50 hover:bg-secondary transition-colors"
                   >
                     {tech}
                   </span>
@@ -136,30 +144,34 @@ const ProjectDetail = () => {
           </article>
 
           {/* Action Footer */}
-          <div className="mt-16 pt-8 border-t border-border flex flex-wrap gap-4 justify-center">
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-bold hover:opacity-90 transition-opacity"
-              >
-                <Github size={20} />
-                View Source Code
-              </a>
-            )}
-            {project.link && (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 rounded-full bg-secondary text-secondary-foreground font-bold hover:bg-secondary/80 transition-colors"
-              >
-                <ExternalLink size={20} />
-                Live Demo
-              </a>
-            )}
+          <div className="mt-20 p-8 rounded-3xl bg-muted/30 border border-border text-center">
+            <h3 className="font-display text-2xl font-bold mb-6">Interested in this project?</h3>
+            <div className="flex flex-wrap gap-4 justify-center">
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-8 py-4 rounded-full bg-foreground text-background font-bold hover:scale-105 transition-transform"
+                >
+                  <Github size={20} />
+                  View Source on GitHub
+                </a>
+              )}
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-8 py-4 rounded-full bg-white border border-border text-foreground font-bold hover:bg-gray-50 transition-colors shadow-sm"
+                >
+                  <ExternalLink size={20} />
+                  View Live Demo
+                </a>
+              )}
+            </div>
           </div>
+
         </div>
       </div>
     </Layout>

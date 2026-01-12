@@ -1,0 +1,14 @@
+System Requirements for Deployment:
+
+1. Node.js Environment
+   - Version: v18.0.0 or higher (LTS recommended)
+   - Check version: node --version
+
+2. Package Manager
+   - npm (comes with Node.js) or yarn
+   - Check version: npm --version
+
+3. Web Server (Optional but recommended for serving build files)
+   - Nginx (for production reverse proxy/static serving)
+   - OR 'serve' npm package (for simple static serving)
+     Install: npm install -g serve

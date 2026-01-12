@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Github, Linkedin, Mail, Cookie } from "lucide-react";
+import { Github, Linkedin, Mail, Cookie, BookOpen } from "lucide-react";
 import { useState } from "react";
 import { personalData } from "@/data/config";
 import {
@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-border bg-cream/50">
       <div className="container mx-auto px-6 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-6">
           {/* Branding */}
           <div className="text-center md:text-left">
             <Link to="/" className="font-display font-bold text-xl text-foreground">
@@ -70,27 +70,38 @@ const Footer = () => {
               href={personalData.socials.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full bg-lavender/50 hover:bg-lavender transition-colors"
+              className="p-3 rounded-full bg-lavender/50 hover:bg-lavender transition-colors"
               aria-label="GitHub"
             >
-              <Github size={18} className="text-foreground" />
+              <Github size={20} className="text-foreground" />
             </a>
             <a
               href={personalData.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full bg-baby-blue/50 hover:bg-baby-blue transition-colors"
+              className="p-3 rounded-full bg-baby-blue/50 hover:bg-baby-blue transition-colors"
               aria-label="LinkedIn"
             >
-              <Linkedin size={18} className="text-foreground" />
+              <Linkedin size={20} className="text-foreground" />
             </a>
             <a
               href={personalData.socials.email}
-              className="p-2 rounded-full bg-peach/50 hover:bg-peach transition-colors"
+              className="p-3 rounded-full bg-peach/50 hover:bg-peach transition-colors"
               aria-label="Email"
             >
-              <Mail size={18} className="text-foreground" />
+              <Mail size={20} className="text-foreground" />
             </a>
+            {personalData.socials.medium && (
+              <a
+                href={personalData.socials.medium}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full bg-emerald-100 dark:bg-emerald-900/30 hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors"
+                aria-label="Medium"
+              >
+                <BookOpen size={20} className="text-foreground" />
+              </a>
+            )}
           </div>
         </div>
 

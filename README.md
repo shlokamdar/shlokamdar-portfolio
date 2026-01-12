@@ -62,6 +62,33 @@ To build the project for production:
 npm run build
 ```
 
+## 🌐 Server Deployment
+
+To host this application on a server (VPS, EC2, DigitalOcean, etc.):
+
+1.  **Ensure System Requirements**:
+    - Consult `requirements.txt` for Node.js and npm version details.
+    - Ideally use Node.js v18 LTS or higher.
+
+2.  **Environment Setup**:
+    - Install Node.js & npm on your server.
+    - Install a process manager like `pm2` or a simple static server like `serve`.
+
+3.  **Deploying the Build**:
+    - Run the build command: `npm run build`
+    - The output will be in the `dist/` folder.
+    - Serve the `dist` folder using a web server.
+    
+    Example using `serve`:
+    ```bash
+    npm install -g serve
+    serve -s dist -l 3000
+    ```
+    
+    Example using Nginx:
+    - Point your Nginx root to the `/absolute/path/to/dist` folder.
+    - Ensure `try_files $uri $uri/ /index.html;` is set for SPA routing.
+
 ## 📂 Project Structure
 
 - `src/components`: Reusable UI components.

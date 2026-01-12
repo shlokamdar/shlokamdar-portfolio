@@ -51,6 +51,7 @@ const Home = () => {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Handle scroll to section when navigating from another page
   useEffect(() => {
@@ -74,13 +75,38 @@ const Home = () => {
     }
   }, [location]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/shlokamdar@gmail.com", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for reaching out. I'll get back to you soon.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -116,7 +142,7 @@ const Home = () => {
           <div className="max-w-4xl">
 
 
-            <h1 className="animate-fade-up-delay-1 font-display text-6xl md:text-7xl lg:text-8xl font-bold text-foreground leading-tight mb-8 tracking-tight">
+            <h1 className="animate-fade-up-delay-1 font-display text-5xl md:text-7xl lg:text-8xl font-bold text-foreground leading-tight mb-8 tracking-tight">
               I'm {personalData.name},
               <br />
               <span className="text-gradient">Unknown Limits</span>
@@ -129,14 +155,14 @@ const Home = () => {
             <div className="animate-fade-up-delay-3 flex flex-wrap gap-6">
               <a
                 href="#projects"
-                className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-foreground text-background font-bold text-lg hover:pr-10 transition-all duration-300"
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-foreground text-background font-bold text-lg hover:pr-10 transition-all duration-300 w-full sm:w-auto"
               >
                 View Projects
                 <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-border bg-white/5 backdrop-blur-sm text-foreground font-medium hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-border bg-white/5 backdrop-blur-sm text-foreground font-medium hover:bg-white/10 transition-colors w-full sm:w-auto"
               >
                 Get in Touch
               </a>
@@ -159,10 +185,10 @@ const Home = () => {
             {/* Bio & Intro */}
             <div className="space-y-8">
               <div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-center lg:text-left mb-8">
+                <h2 className="font-display text-4xl md:text-4xl font-bold text-center lg:text-left mb-8">
                   <span className="text-gradient">About Me</span>
                 </h2>
-                <div className="glass-card p-8">
+                <div className="glass-card p-6 md:p-8">
                   <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                     {personalData.bio}
                   </p>
@@ -414,7 +440,7 @@ const Home = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white/10 focus:border-lavender/50 transition-all backdrop-blur-sm"
+                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white/10 focus:border-lavender/50 transition-all backdrop-blur-sm text-base"
                     placeholder="Your name"
                   />
                 </div>
@@ -430,7 +456,7 @@ const Home = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white/10 focus:border-lavender/50 transition-all backdrop-blur-sm"
+                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white/10 focus:border-lavender/50 transition-all backdrop-blur-sm text-base"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -446,17 +472,24 @@ const Home = () => {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white/10 focus:border-lavender/50 transition-all backdrop-blur-sm resize-none"
+                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white/10 focus:border-lavender/50 transition-all backdrop-blur-sm resize-none text-base"
                     placeholder="Tell me about your project or just say hi..."
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-foreground text-background font-bold text-lg hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-foreground text-background font-bold text-lg hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <Send size={18} />
-                  Send Message
+                  {isSubmitting ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      Send Message
+                    </>
+                  )}
                 </button>
               </form>
             </div>
